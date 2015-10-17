@@ -21,11 +21,11 @@ def getGoogleMapsLinks(searchTerm):
     br.addheaders = [('User-Agent','Google Chrome')]
 
     htmltext = br.open(url,timeout=3.0).read()
-    soup = BeautifulSoup(htmltext)
+    soup = BeautifulSoup(htmltext, 'lxml')
     vcards = soup.findAll('div' ,attrs={'class':'text vcard indent block'})
 
     for vcard in vcards:
-        soup2 = BeautifulSoup(str(vcard))
+        soup2 = BeautifulSoup(str(vcard), 'lxml')
         phoneRes = soup2.findAll('span',attrs={"class":"pp-headline-item pp-headline-phone"})
         soupPhone = BeautifulSoup(str(phoneRes[0]))
         phoneRes = soupPhone.findAll('nobr')[0].text
